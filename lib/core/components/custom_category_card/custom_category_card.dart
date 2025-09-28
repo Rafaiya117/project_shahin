@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_shahin/core/utils/theme.dart';
 
 class CategoryCard extends StatelessWidget {
   final String iconPath;
@@ -23,7 +24,7 @@ class CategoryCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.categorycard_color,
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
@@ -41,7 +42,7 @@ class CategoryCard extends StatelessWidget {
               height: 40.w,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.grey.shade200,
+                color: Colors.white,
               ),
               child: Center(
                 child: SvgPicture.asset(
@@ -61,7 +62,7 @@ class CategoryCard extends StatelessWidget {
                     fontFamily: 'SFProDisplay',
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    color: AppTextColors.primary_color,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -71,7 +72,7 @@ class CategoryCard extends StatelessWidget {
                     fontFamily: 'SFProDisplay',
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey.shade600,
+                    color: AppTextColors.primary_color,
                   ),
                 ),
               ],

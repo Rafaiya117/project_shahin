@@ -10,7 +10,7 @@ class FirstLandingpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: OnboardingCard(
-        backgroundImage: "assets/images/lan1.png",
+        backgroundImage: "assets/images/lan2.png",
         title: "Every Day. No Excuse",
         description:"Get brutal quotes every day. Alpha kills comfort and\n fuels your grind",
         dotsCount: 3,

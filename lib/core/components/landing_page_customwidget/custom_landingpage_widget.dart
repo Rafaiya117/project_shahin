@@ -31,11 +31,12 @@ class OnboardingCard extends StatelessWidget {
     return Stack(
       children: <Widget>[
         /// Background Image
-        Positioned.fill(
-          child: Image.asset(
-            backgroundImage,
-            fit: BoxFit.cover,
-          ),
+        Positioned(
+          top: 0,
+          left: 0,
+          right: 0,
+          //height: MediaQuery.of(context).size.height * 0.6,
+          child: Image.asset(backgroundImage, fit: BoxFit.cover),
         ),
 
         /// Gradient Overlay
@@ -48,9 +49,10 @@ class OnboardingCard extends StatelessWidget {
                 colors: [
                   const Color(0xFF232D3B),
                   const Color(0xFF232D3B),
-                  Colors.white.withOpacity(0.0),
+                  // ignore: deprecated_member_use
+                 const Color(0xFF232D3B).withOpacity(0.0),
                 ],
-                stops: const [0.0, 0.5, 1.2],
+                stops: const [0.0, 0.4,0.6],
               ),
             ),
           ),
@@ -58,7 +60,7 @@ class OnboardingCard extends StatelessWidget {
 
         /// Content
         Positioned.fill(
-          top: 450,
+          top: 490,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0.w),
             child: Column(

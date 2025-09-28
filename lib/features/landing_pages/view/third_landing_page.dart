@@ -9,7 +9,7 @@ class ThirdLandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: OnboardingCard(
-        backgroundImage: "assets/images/lan1.png",
+        backgroundImage: "assets/images/lan4.png",
         title: "From Quotes to Power",
         description:"Each badge marks growth, Each title proves strength,\nAlpha forges your unbreakable mindset                ",
         dotsCount: 3,

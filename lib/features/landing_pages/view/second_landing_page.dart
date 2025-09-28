@@ -9,7 +9,7 @@ class SecondLandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: OnboardingCard(
-        backgroundImage: "assets/images/lan1.png",
+        backgroundImage: "assets/images/la3.png",
         title: "Join the Alpha Circle",
         description:"Climb the ranks like a wolf,Even badges, Unlock\ntitles.Prove dominance",
         dotsCount: 3,

@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
-import 'package:project_shahin/features/achivement/view/achivement_view.dart';
+import 'package:project_shahin/features/achivement/view/achivement_view_badge.dart';
+import 'package:project_shahin/features/achivement/view/achivment_title_view.dart';
+import 'package:project_shahin/features/alpha_circle/alpha_circle.dart';
 import 'package:project_shahin/features/auth/forgot_password/view/forgot_passowrd.dart';
 import 'package:project_shahin/features/auth/login/view/loginpage.dart';
 import 'package:project_shahin/features/auth/otp/view/otp.dart';
@@ -20,6 +22,7 @@ import 'package:project_shahin/features/notification_settings/view/notification_
 import 'package:project_shahin/features/profile/view/edit_password.dart';
 import 'package:project_shahin/features/profile/view/edit_profile.dart';
 import 'package:project_shahin/features/profile/view/profile_menu.dart';
+import 'package:project_shahin/features/search/serach_view.dart';
 import 'package:project_shahin/features/settings/help_and_support/help_support.dart';
 import 'package:project_shahin/features/settings/priavacy_policy/privacy_policy.dart';
 import 'package:project_shahin/features/settings/settings.dart';
@@ -132,6 +135,18 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/achivment',
       builder: (context, state) => AchivementView(),
+    ),
+    GoRoute(
+      path: '/titles',
+      builder: (context, state) => AchivmentTitleView(),
+    ),
+    GoRoute(
+      path: '/search',
+      builder: (context, state) => SuggestionScreen(),
+    ),
+    GoRoute(
+      path: '/alpha_circle',
+      builder: (context, state) => AlphaCircle(),
     ),
   ],
 );

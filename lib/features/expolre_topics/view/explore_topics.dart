@@ -50,10 +50,15 @@ class ExploreTopics extends StatelessWidget {
                             color: AppTextColors.primary_color,
                           ),
                         ),
-                        SvgPicture.asset(
-                          'assets/icons/search.svg',
-                          width: 13.w,
-                          height: 16.h,
+                        GestureDetector(
+                          onTap:() {
+                            context.push('/search');
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/search.svg',
+                            width: 13.w,
+                            height: 16.h,
+                          ),
                         ),
                       ],
                     ),

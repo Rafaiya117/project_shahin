@@ -60,11 +60,11 @@ class _AchievementBadgeState extends State<AchievementBadge> {
         ),
         child: Column(
           children: [
-            SvgPicture.asset(
+           Image.asset(
               widget.iconPath,
               width: 40,
               height: 40,
-              color: Colors.white,
+              //color: Colors.white, // optional
             ),
             const SizedBox(height: 16),
             Expanded(
@@ -88,6 +88,7 @@ class _AchievementBadgeState extends State<AchievementBadge> {
                         color: Colors.grey[400],
                         fontSize: 13,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(height: 8),

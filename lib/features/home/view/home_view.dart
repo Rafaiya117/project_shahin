@@ -118,7 +118,9 @@ class Home extends StatelessWidget {
                     ),
                     Spacer(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.push('/alpha_circle');
+                      },
                       child: SvgPicture.asset(
                         'assets/icons/home_bar_icon.svg',
                         width: 40.w,

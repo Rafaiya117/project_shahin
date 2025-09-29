@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_shahin/config/app_route/app_route.dart';
 import 'package:project_shahin/config/connectivity/no_connectivity.dart';
+import 'package:project_shahin/features/home/controller/home_controller.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -43,16 +44,21 @@ class _MyAppState extends State<MyApp> {
       designSize: const Size(393, 852),
       minTextAdapt: true,
       builder: (context, child) {
-        return MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            ),
+            routerConfig: appRouter,
+            builder: (context, child) {
+              return hasConnection ? child! : const NoInternetWidget();
+            },
           ),
-          routerConfig: appRouter,
-          builder: (context, child) {
-            return hasConnection ? child! : const NoInternetWidget();
-          },
         );
       },
     );

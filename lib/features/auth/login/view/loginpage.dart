@@ -111,7 +111,7 @@ class Loginpage extends StatelessWidget {
               child: CustomElevatedButton(
               text: 'Sign In',
                 onPressed: () {
-                  //context.push('/login');
+                    context.push('/home');
                 },
                   backgroundColor: AppColors.button_background,
                   textColor: AppTextColors.secondary_color,

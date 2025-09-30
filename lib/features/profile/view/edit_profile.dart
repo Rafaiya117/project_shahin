@@ -105,13 +105,20 @@ class EditProfile extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 12.w),
-                          Text(
-                            'Alex Smith',
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                              fontFamily: 'SFProDisplay',
+                          Expanded(
+                            child: TextField(
+                              controller: TextEditingController(text: "Alex Smith",),
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                                fontFamily: 'SFProDisplay',
+                              ),
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                isCollapsed: true,
+                                contentPadding: EdgeInsets.zero,
+                              ),
                             ),
                           ),
                         ],
@@ -220,7 +227,28 @@ class EditProfile extends StatelessWidget {
                 child: CustomElevatedButton(
                   text: 'Save',
                   onPressed: () {
-                    // context.push('/profile');
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Profile updated successfully',
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                          ),
+                        ),
+                        backgroundColor: AppColors.categorycard_color,
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h,
+                        ),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                    //context.push('/profile');
                   },
                   backgroundColor: AppColors.button_background,
                   textColor: AppTextColors.secondary_color,

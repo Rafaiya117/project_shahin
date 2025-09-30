@@ -32,6 +32,12 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       onChanged: onChanged,
+      style: TextStyle(
+        fontFamily: 'SFProDisplay',
+        fontSize: 16.sp,
+        fontWeight: FontWeight.normal,
+        color: AppTextColors.primary_color,
+      ),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(

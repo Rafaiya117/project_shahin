@@ -52,7 +52,7 @@ class _AchievementBadgeState extends State<AchievementBadge> {
         margin: const EdgeInsets.symmetric(vertical: 8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF1E1E2C),
+          color: AppColors.categorycard_color,
           borderRadius: BorderRadius.circular(12),
           border: isSelected
               ? Border.all(color: Colors.blueAccent, width: 2)

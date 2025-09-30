@@ -22,7 +22,7 @@ class CustomToggleBar extends StatefulWidget {
   const CustomToggleBar({
     super.key,
     required this.items,
-    this.initialIndex = 0,
+    this.initialIndex = 1,
   });
 
   @override
@@ -40,7 +40,7 @@ class _CustomToggleBarState extends State<CustomToggleBar> {
 
   void _onSelect(int index) {
     setState(() => _selectedIndex = index);
-    widget.items[index].onTap(); // 🔥 call parent-provided action
+    widget.items[index].onTap(); 
   }
 
   @override

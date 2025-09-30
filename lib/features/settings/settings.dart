@@ -24,9 +24,9 @@ class Settings extends StatelessWidget {
                     context.pop();
                   },
                   child: SvgPicture.asset(
-                    'assets/icons/back_arrow.svg',
-                    width: 24.w,
-                    height: 24.h,
+                    'assets/icons/arrow_forward.svg',
+                    width: 16.w,
+                    height: 16.h,
                     color: AppTextColors.primary_color,
                   ),
                 ),

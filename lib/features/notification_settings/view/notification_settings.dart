@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/utils/theme.dart';
 
 class NotificationSettings extends StatefulWidget {
@@ -53,7 +54,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () {
-            // Handle back button press
+            context.pop();
           },
         ),
         title: Text(

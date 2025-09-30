@@ -10,8 +10,8 @@ class QuoteCard extends StatefulWidget {
   final String likeIconPath;
   final String commentIconPath;
   final String shareIconPath;
-  final bool showActions; // NEW FLAG
-
+  final bool showActions; 
+  final VoidCallback? onShare;
   const QuoteCard({
     Key? key,
     required this.quoteText,
@@ -20,7 +20,8 @@ class QuoteCard extends StatefulWidget {
     required this.likeIconPath,
     required this.commentIconPath,
     required this.shareIconPath,
-    this.showActions = true, 
+    this.showActions = true,
+    this.onShare, 
   }) : super(key: key);
 
   @override
@@ -104,7 +105,11 @@ class _QuoteCardState extends State<QuoteCard> {
                 const SizedBox(width: 16),
                 iconButton(widget.commentIconPath, isCommented, () => toggle('comment')),
                 const SizedBox(width: 16),
-                iconButton(widget.shareIconPath, isShared, () => toggle('share')),
+                // iconButton(widget.shareIconPath, isShared, () => toggle('share')),
+                iconButton(widget.shareIconPath, isShared, () {
+                  toggle('share');
+                  if (widget.onShare != null) widget.onShare!();
+                }),
               ],
             ],
           ),

@@ -21,12 +21,18 @@ class ProfileMenu extends StatelessWidget {
             Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
+                GestureDetector(
+                  onTap: () {
+                    context.pop();
+                  },
+                  child: SvgPicture.asset(
                     'assets/icons/arrow_forward.svg',
-                    width: 13.w,
+                    width: 16.w,
                     height: 16.h,
+                    color: AppTextColors.primary_color,
                   ),
-                  SizedBox(width: 20.w,),
+                ),
+                SizedBox(width: 20.w),
                   Text(
                     "Profile",
                     style: TextStyle(
@@ -38,14 +44,22 @@ class ProfileMenu extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(height: 30.h,),
             // Profile Info
             Row(
               children: [
                 CircleAvatar(
                   radius: 30.r,
                   backgroundColor: Colors.grey.shade800,
-                  child: Icon(Icons.person, color: Colors.white, size: 30.sp),
+                  child: ClipRRect(
+                    //borderRadius: BorderRadius.circular(30.r),
+                    child: Image.asset(
+                      'assets/images/profile_pic.png',
+                      width: 60.w,
+                      height: 60.h,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 SizedBox(width: 16.w),
                 Column(
@@ -66,6 +80,7 @@ class ProfileMenu extends StatelessWidget {
                         color: Colors.grey,
                       ),
                     ),
+                    SizedBox(height: 5.h),
                      Row(
                       children: [
                         Container(
@@ -179,7 +194,7 @@ class ProfileMenu extends StatelessWidget {
               svgIconPath:'assets/icons/profile_premium.svg' ,
               label: 'Subscription',
               onTap: () {
-                
+                context.push('/subscription_page');
               },
             ),
             ProfileMenuItem(

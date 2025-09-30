@@ -73,12 +73,18 @@ class Home extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            SvgPicture.asset(
-                              'assets/icons/points.svg',
-                              width: 12.w,
-                              height: 11.h,
+                            GestureDetector(
+                              onTap: () {
+                                context.pop();
+                              },
+                              child: SvgPicture.asset(
+                                'assets/icons/points.svg',
+                                width: 12.w,
+                                height: 11.h,
+                                color: AppTextColors.primary_color,
+                              ),
                             ),
-                            SizedBox(width: 4.w,),
+                            SizedBox(width: 4.w),
                             Text(
                               "$value pts",
                               style: const TextStyle(
@@ -94,7 +100,20 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
-
+            Positioned(
+              top: 50,
+              right: 10,
+              child:GestureDetector(
+                onTap: () {
+                  context.push('/subscription_page');
+                },
+                child: SvgPicture.asset(
+                  'assets/icons/home_premium_icon.svg',
+                  width: 40.w,
+                  height: 40.h,
+                ),
+              ),
+            ),
             // Bottom navigation bar (custom style)
             Align(
               alignment: Alignment.bottomCenter,
@@ -129,7 +148,9 @@ class Home extends StatelessWidget {
                     ),
                     SizedBox(width: 5.w,),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.push('/profile');
+                      },
                       child: SvgPicture.asset(
                         'assets/icons/profile_icon.svg',
                         width: 40.w,

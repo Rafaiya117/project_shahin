@@ -1,7 +1,9 @@
 import 'package:go_router/go_router.dart';
 import 'package:project_shahin/features/achivement/view/achivement_view_badge.dart';
 import 'package:project_shahin/features/achivement/view/achivment_title_view.dart';
+import 'package:project_shahin/features/achivement/view/new_rank.dart';
 import 'package:project_shahin/features/alpha_circle/alpha_circle.dart';
+import 'package:project_shahin/features/alpha_circle/alpha_friend_circle.dart';
 import 'package:project_shahin/features/auth/forgot_password/view/forgot_passowrd.dart';
 import 'package:project_shahin/features/auth/login/view/loginpage.dart';
 import 'package:project_shahin/features/auth/otp/view/otp.dart';
@@ -28,6 +30,8 @@ import 'package:project_shahin/features/settings/priavacy_policy/privacy_policy.
 import 'package:project_shahin/features/settings/settings.dart';
 import 'package:project_shahin/features/settings/terms_and_condition/term_&_condition.dart';
 import 'package:project_shahin/features/splash_screen.dart';
+import 'package:project_shahin/features/subscription/view/check_out.dart';
+import 'package:project_shahin/features/subscription/view/subscription_view.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -147,6 +151,22 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/alpha_circle',
       builder: (context, state) => AlphaCircle(),
+    ),
+    GoRoute(
+      path: '/alpha_friend_circle',
+      builder: (context, state) => AlphaFriendCircle(),
+    ),
+    GoRoute(
+      path: '/subscription_page',
+      builder: (context, state) => PremiumUpgradePage(),
+    ),
+    GoRoute(
+      path: '/checkout_page',
+      builder: (context, state) => CheckoutPage(),
+    ),
+    GoRoute(
+      path: '/new_rank',
+      builder: (context, state) => NewRankPage(),
     ),
   ],
 );

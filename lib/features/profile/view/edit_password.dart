@@ -20,12 +20,18 @@ class EditPassword extends StatelessWidget {
             Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
+                GestureDetector(
+                  onTap: () {
+                    context.pop();
+                  },
+                  child: SvgPicture.asset(
                     'assets/icons/arrow_forward.svg',
-                    width: 13.w,
+                    width: 16.w,
                     height: 16.h,
+                    color: AppTextColors.primary_color,
                   ),
-                  SizedBox(width: 20.w,),
+                ),
+                SizedBox(width: 20.w),
                   Text(
                     "Edit Password",
                     style: TextStyle(
@@ -81,11 +87,57 @@ class EditPassword extends StatelessWidget {
           width: double.infinity,
           child: CustomElevatedButton(
             text: 'Save',
-            onPressed: () {
-              //context.push('/profile');
-            },
-            backgroundColor: AppColors.button_background,
-            textColor: AppTextColors.secondary_color,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: AppColors.categorycard_color,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      title: Text(
+                        'Success',
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontFamily: 'SFProDisplay',
+                        ),
+                      ),
+                      content: Text(
+                        'Your password has been updated.',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white70,
+                          fontFamily: 'SFProDisplay',
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                              // Optionally navigate to profile
+                              context.pop();
+                            },
+                            child: Text(
+                              'OK',
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppTextColors.primary_color,
+                                fontFamily: 'SFProDisplay',
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              backgroundColor: AppColors.button_background,
+              textColor: AppTextColors.secondary_color,
               ),
             ),
           ],

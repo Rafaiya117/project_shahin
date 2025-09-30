@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/components/qoute_card/custom_qoute_card.dart';
 import 'package:project_shahin/core/utils/theme.dart';
 
@@ -19,12 +20,18 @@ class Notification extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  'assets/icons/arrow_forward.svg',
-                  width: 13.w,
-                  height: 16.h,
+                GestureDetector(
+                  onTap: () {
+                    context.pop();
+                  },
+                  child: SvgPicture.asset(
+                    'assets/icons/back_arrow.svg',
+                    width: 24.w,
+                    height: 24.h,
+                    color: AppTextColors.primary_color,
+                  ),
                 ),
-                SizedBox(width: 20.w,),
+                SizedBox(width: 20.w),
                 Text(
                   "Notifications",
                   style: TextStyle(

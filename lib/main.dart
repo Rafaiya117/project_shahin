@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_shahin/config/app_route/app_route.dart';
 import 'package:project_shahin/config/connectivity/no_connectivity.dart';
+import 'package:project_shahin/features/achivement/controller/achivement_controller.dart';
+import 'package:project_shahin/features/alpha_circle/controller/controller.dart';
+import 'package:project_shahin/features/category/controller/category_controller.dart';
+import 'package:project_shahin/features/collection/controller/collection_controller.dart';
+import 'package:project_shahin/features/favourite/controller/favourite_controller.dart';
+import 'package:project_shahin/features/history/contoller/history_controller.dart';
 import 'package:project_shahin/features/home/controller/home_controller.dart';
+import 'package:project_shahin/features/search/controller/search_controller.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -47,6 +54,13 @@ class _MyAppState extends State<MyApp> {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider<HomeController>(create: (_) => HomeController()),
+            ChangeNotifierProvider<CategoryController>(create: (_) => CategoryController()),
+            ChangeNotifierProvider<SuggestionController>(create: (_) => SuggestionController()),
+            ChangeNotifierProvider<FavouriteController>(create: (_) => FavouriteController()),
+            ChangeNotifierProvider<QuoteController>(create: (_) => QuoteController()),
+            ChangeNotifierProvider<History_Controller>(create: (_) => History_Controller()),
+            ChangeNotifierProvider<AlphaCircleController>(create: (_) => AlphaCircleController()),
+            ChangeNotifierProvider<AchivementController>(create: (_) => AchivementController()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

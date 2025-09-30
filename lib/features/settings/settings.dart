@@ -19,12 +19,18 @@ class Settings extends StatelessWidget {
             Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
+                GestureDetector(
+                  onTap: () {
+                    context.pop();
+                  },
+                  child: SvgPicture.asset(
+                    'assets/icons/back_arrow.svg',
+                    width: 24.w,
+                    height: 24.h,
+                    color: AppTextColors.primary_color,
                   ),
-                  SizedBox(width: 20.w,),
+                ),
+                SizedBox(width: 20.w),
                   Text(
                     "Settings",
                     style: TextStyle(

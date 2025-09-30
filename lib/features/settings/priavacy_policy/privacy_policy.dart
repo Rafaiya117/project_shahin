@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/utils/theme.dart';
 
 class PrivacyPolicy extends StatelessWidget {
@@ -15,14 +16,20 @@ class PrivacyPolicy extends StatelessWidget {
         child: Column(
           children: [
             Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    context.pop();
+                  },
+                  child: SvgPicture.asset(
+                    'assets/icons/back_arrow.svg',
+                    width: 24.w,
+                    height: 24.h,
+                    color: AppTextColors.primary_color,
                   ),
-                  SizedBox(width: 20.w,),
+                ),
+                SizedBox(width: 20.w),
                   Text(
                     "Privacy and Policy",
                     style: TextStyle(

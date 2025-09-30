@@ -26,12 +26,19 @@ class ResetPassowrd extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
+                  GestureDetector(
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/arrow_forward.svg',
+                      width: 13.w,
+                      height: 16.h,
+                      // ignore: deprecated_member_use
+                      color: AppTextColors.primary_color,
+                    ),
                   ),
-                  SizedBox(width: 100.w,),
+                  SizedBox(width: 100.w),
                   Text(
                     "Reset Password",
                     style: TextStyle(
@@ -98,7 +105,7 @@ class ResetPassowrd extends StatelessWidget {
               child: CustomElevatedButton(
               text: 'Reset Password',
                 onPressed: () {
-                context.push('/profile');
+                //context.push('/profile');
                 },
                   backgroundColor: AppColors.button_background,
                   textColor: AppTextColors.secondary_color,

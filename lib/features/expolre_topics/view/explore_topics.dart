@@ -36,10 +36,17 @@ class ExploreTopics extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SvgPicture.asset(
-                          'assets/icons/arrow_forward.svg',
-                          width: 13.w,
-                          height: 16.h,
+                        GestureDetector(
+                          onTap: () {
+                            context.pop();
+                          },
+                          child: SvgPicture.asset(
+                           'assets/icons/arrow_forward.svg',
+                            width: 13.w,
+                            height: 16.h,
+                            // ignore: deprecated_member_use
+                            color: AppTextColors.primary_color,
+                          ),
                         ),
                         Text(
                           "Explore Topics",
@@ -80,7 +87,7 @@ class ExploreTopics extends StatelessWidget {
                         children: [
                           FavoriteCard(
                             text: "My\nFavorites",
-                            svgIconPath: "assets/icons/heart.svg",
+                            svgIconPath: "assets/icons/heart_two.svg",
                             initialIconColor: Colors.white,
                             tappedIconColor: Colors.pinkAccent,
                             onTap: () {

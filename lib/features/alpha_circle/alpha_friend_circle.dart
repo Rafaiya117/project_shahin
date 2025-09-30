@@ -4,86 +4,162 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/utils/theme.dart';
 import 'package:project_shahin/features/achivement/custom_widget/custom_toogle_badge.dart';
+import 'package:project_shahin/features/alpha_circle/controller/controller.dart';
 import 'package:project_shahin/features/alpha_circle/widget/custom_user_card.dart';
+import 'package:provider/provider.dart';
 
 class AlphaFriendCircle extends StatelessWidget {
   const AlphaFriendCircle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-    backgroundColor: AppColors.background_color,
-    body: Center(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 32.h),
-        child: Column(
+    return ChangeNotifierProvider(
+      create: (_) => AlphaCircleController(),
+      child: Scaffold(
+        backgroundColor: AppColors.background_color,
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 40.h),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header Row
+              // Header + Toggles (unchanged)
               Row(
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
+                  GestureDetector(
+                    onTap: () {
+                      context.pop();
+                    },
+                    child:SvgPicture.asset(
+                      'assets/icons/arrow_forward.svg',
+                      width: 13.w,
+                      height: 16.h,
+                      // ignore: deprecated_member_use
+                      color: AppTextColors.primary_color,
+                    ),
                   ),
                   SizedBox(width: 20.w),
-                  Text(
-                    "Achievements",
-                    style: TextStyle(
-                      fontFamily: 'SFProDisplay',
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppTextColors.primary_color,
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Alpha Circle\n",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppTextColors.primary_color,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "Complete with the best",
+                          style: TextStyle(
+                            fontFamily: 'SFProDisplay',
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            // ignore: deprecated_member_use
+                            color: AppTextColors.primary_color.withOpacity(0.8),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 50.w),
+                  Container(
+                    width: 141.w,
+                    height: 40.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.categorycard_color,
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(
+                        color: AppColors.button_background,
+                        width: 1.w,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Invite Friends',
+                        style: TextStyle(
+                          fontFamily: 'SFProDisplay',
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppTextColors.primary_color,
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 30.h),
               CustomToggleBar(
                 items: [
                   ToggleItem(
-                    label: "Badges",
-                    svgIcon: "assets/icons/badge.svg",
+                    label: "Global",
+                    svgIcon: "assets/icons/trophy.svg",
                     onTap: () {
                       print("Badges clicked");
                 
                     },
                   ),
                   ToggleItem(
-                    label: "Titles",
-                    svgIcon: "assets/icons/title.svg",
+                    label: "Friends",
+                    svgIcon: "assets/icons/friend_circle.svg",
+                    onTap: () {
+                      print("Titles clicked");
+                        context.push('/alpha_friend_circle');
+                      },
+                    ),
+                  ],
+                ),
+              SizedBox(height: 20.h),
+              CustomToggleBar(
+                items: [
+                  ToggleItem(
+                    label: "This Week",
+                    svgIcon: "",
+                    onTap: () {
+                      print("Badges clicked");
+                
+                    },
+                  ),
+                  ToggleItem(
+                    label: "This Month",
+                    svgIcon: "",
                     onTap: () {
                       print("Titles clicked");
                         context.push('/titles');
                       },
                     ),
-                  ],
-                ),
-              SizedBox(height: 10.h),
-              UserCard(
-                rank: 2,
-                imageUrl:'https://via.placeholder.com/150', 
-                name: 'David Lee',
-                role: 'Hunter', 
-                level: 10,
-                points: 800,
+                    ToggleItem(
+                    label: "All Time",
+                    svgIcon: "",
+                    onTap: () {
+                      print("Titles clicked");
+                        context.push('/titles');
+                    },
+                  ),
+                ],
               ),
-              UserCard(
-                rank: 3,
-                imageUrl:'https://via.placeholder.com/150/FF0000/FFFFFF?text=A', 
-                name: 'Alice Smith',
-                role: 'Warrior', 
-                level: 8,
-                points: 750,
-              ),
-              UserCard(
-                rank: 4,
-                imageUrl:'https://via.placeholder.com/150/0000FF/FFFFFF?text=B', 
-                name: 'Bob Jones',
-                role:'Engineer', 
-                level: 5,
-                points: 400,
+              SizedBox(height: 20.h),
+              Consumer<AlphaCircleController>(
+                builder: (context, controller, _) {
+                  return Column(
+                    children: List.generate(controller.users.length, (index) {
+                      final user = controller.users[index];
+                      return UserCard(
+                        rank: user.rank,
+                        imageUrl: user.imageUrl,
+                        name: user.name,
+                        role: user.role,
+                        level: user.level,
+                        points: user.points,
+                        isSelected: user.isSelected,
+                        onTap: () => controller.selectUser(index),
+                        iconPath: user.iconPath,
+                      );
+                    }),
+                  );
+                },
               ),
             ],
           ),

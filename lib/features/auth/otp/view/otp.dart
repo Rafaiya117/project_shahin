@@ -27,12 +27,19 @@ class Otppage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
+                  GestureDetector(
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/arrow_forward.svg',
+                      width: 13.w,
+                      height: 16.h,
+                      // ignore: deprecated_member_use
+                      color: AppTextColors.primary_color,
+                    ),
                   ),
-                  SizedBox(width: 150.w,),
+                  SizedBox(width: 150.w),
                   Text(
                     "OTP",
                     style: TextStyle(
@@ -89,6 +96,12 @@ class Otppage extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 borderRadius: BorderRadius.circular(12),
                 onCodeChanged: (String code) {},
+                textStyle: TextStyle(
+                  fontFamily: 'SFProDisplay',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.sp,
+                  color: AppTextColors.primary_color,
+                ),
                 onSubmit: (String verificationCode) {
                   showDialog(
                     context: context,

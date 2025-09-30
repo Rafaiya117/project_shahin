@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart'; 
-
-
-String _getRoleIconPath(String role) {
-  final normalizedRole = role.toLowerCase();
-
-  switch (normalizedRole) {
-    case 'hunter':
-      return 'assets/icons/hunter_icon.svg'; 
-    case 'warrior':
-      return 'assets/icons/warrior_icon.svg';
-    case 'mage':
-      return 'assets/icons/mage_icon.svg';
-    default:
-      return 'assets/icons/default_icon.svg'; 
-  }
-}
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_shahin/core/utils/theme.dart'; 
 
 class UserCard extends StatelessWidget {
   final int rank;
@@ -24,7 +9,9 @@ class UserCard extends StatelessWidget {
   final String role;
   final int level;
   final int points;
-
+  final bool isSelected;
+  final VoidCallback? onTap;
+  final String iconPath;
   const UserCard({
     Key? key,
     required this.rank,
@@ -33,17 +20,21 @@ class UserCard extends StatelessWidget {
     required this.role,
     required this.level,
     required this.points,
+    this.isSelected = false,
+    required this.iconPath,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final iconPath = _getRoleIconPath(role);
-
-    return Container(
-      padding: const EdgeInsets.all(12.0),
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+    return GestureDetector(
+      onTap: (){},
+      child:Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(10.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
-        color: const Color(0xFF2C3240),
+        color: AppColors.categorycard_color,
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
@@ -54,13 +45,13 @@ class UserCard extends StatelessWidget {
             height: 36,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: const Color(0xFF6B7280), 
+              color:AppColors.button_background, 
               shape: BoxShape.circle,
             ),
             child: Text(
               '$rank',
               style: const TextStyle(
-                color: Colors.white,
+                color: AppTextColors.secondary_color,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -80,14 +71,14 @@ class UserCard extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF6B7280), // Gray background for level badge
+                    color: AppColors.button_background, 
                     borderRadius: BorderRadius.circular(10.0),
                     border: Border.all(color: Colors.white, width: 1.5),
                   ),
                   child: Text(
                     '$level',
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: AppTextColors.secondary_color,
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
                     ),
@@ -115,12 +106,12 @@ class UserCard extends StatelessWidget {
                 Row(
                   children: [
                     // Dynamic SVG Icon based on role
-                    SvgPicture.asset(
+                    Image.asset(
                       iconPath,
-                      colorFilter: const ColorFilter.mode(
-                        Color(0xFFA0AEC0), 
-                        BlendMode.srcIn,
-                      ),
+                      // colorFilter: const ColorFilter.mode(
+                      //   Color(0xFFA0AEC0), 
+                      //   BlendMode.srcIn,
+                      // ),
                       width: 16,
                       height: 16,
                     ),
@@ -161,6 +152,7 @@ class UserCard extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }

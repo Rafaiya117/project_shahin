@@ -26,12 +26,19 @@ class ForgotPassowrd extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
+                  GestureDetector(
+                    onTap: () {
+                      context.pop();
+                    },
+                    child: SvgPicture.asset(
+                      'assets/icons/arrow_forward.svg',
+                      width: 13.w,
+                      height: 16.h,
+                      // ignore: deprecated_member_use
+                      color: AppTextColors.primary_color,
+                    ),
                   ),
-                  SizedBox(width: 100.w,),
+                  SizedBox(width: 100.w),
                   Text(
                     "Forgot Password",
                     style: TextStyle(

@@ -24,11 +24,18 @@ class AchivmentTitleView extends StatelessWidget {
               // Header Row
               Row(
                 children: [
-                  SvgPicture.asset(
-                    'assets/icons/arrow_forward.svg',
-                    width: 13.w,
-                    height: 16.h,
-                  ),
+                  GestureDetector(
+                      onTap: () {
+                        context.pop();
+                      },
+                      child:SvgPicture.asset(
+                      'assets/icons/arrow_forward.svg',
+                      width: 13.w,
+                      height: 16.h,
+                      // ignore: deprecated_member_use
+                      color: AppTextColors.primary_color,
+                    ),
+                    ),
                   SizedBox(width: 20.w),
                   Text(
                     "Achievements",
@@ -79,7 +86,8 @@ class AchivmentTitleView extends StatelessWidget {
                   points: "1000 Points",
                   iconPath: '',
                   onTap: () {
-                    print("Tile tapped");
+                    //print("Tile tapped");
+                    context.push('/new_rank');
                   },
                 ),
                 SizedBox(height: 10.h),

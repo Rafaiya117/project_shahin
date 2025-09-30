@@ -8,13 +8,14 @@ class CategoryCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onTap;
-
+  final bool isSelected;
   const CategoryCard({
     super.key,
     required this.iconPath,
     required this.title,
     required this.subtitle,
     required this.onTap,
+    this.isSelected = false,
   });
 
   @override
@@ -26,6 +27,9 @@ class CategoryCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.categorycard_color,
           borderRadius: BorderRadius.circular(16.r),
+          border: isSelected
+            ? Border.all(color: Colors.white, width: 2) 
+            : null,
           boxShadow: [
             BoxShadow(
               // ignore: deprecated_member_use

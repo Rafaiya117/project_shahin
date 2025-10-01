@@ -5,6 +5,8 @@ import 'package:project_shahin/config/app_route/app_route.dart';
 import 'package:project_shahin/config/connectivity/no_connectivity.dart';
 import 'package:project_shahin/features/achivement/controller/achivement_controller.dart';
 import 'package:project_shahin/features/alpha_circle/controller/controller.dart';
+import 'package:project_shahin/features/auth/login/controller/login_controller.dart';
+import 'package:project_shahin/features/auth/sign_up/controller/signup_controller.dart';
 import 'package:project_shahin/features/category/controller/category_controller.dart';
 import 'package:project_shahin/features/collection/controller/collection_controller.dart';
 import 'package:project_shahin/features/favourite/controller/favourite_controller.dart';
@@ -61,6 +63,9 @@ class _MyAppState extends State<MyApp> {
             ChangeNotifierProvider<History_Controller>(create: (_) => History_Controller()),
             ChangeNotifierProvider<AlphaCircleController>(create: (_) => AlphaCircleController()),
             ChangeNotifierProvider<AchivementController>(create: (_) => AchivementController()),
+            ChangeNotifierProvider<LoginController>(create: (_) => LoginController()),
+            ChangeNotifierProvider<SignupController>(create: (_) => SignupController()),
+           
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

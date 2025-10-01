@@ -43,4 +43,8 @@ class QuoteController extends ChangeNotifier {
     // ignore: deprecated_member_use
     Share.share(content);
   }
+
+  void handleDelete() {
+    print('Item deleted successfully!');
+  }
 }

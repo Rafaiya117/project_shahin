@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class LoginController extends ChangeNotifier{
+class SignupController extends ChangeNotifier{
   final emailController = TextEditingController();
+  final nameController = TextEditingController();
   final passwordController = TextEditingController();
-
 
   void disposeControllers() {
     emailController.dispose();
+    nameController.dispose();
     passwordController.dispose();
   }
 
@@ -19,7 +20,7 @@ class LoginController extends ChangeNotifier{
     return true;
   }
 
-  bool validateLoginFields() {
-    return areFieldsFilled([emailController, passwordController]);
+  bool validateSignupFields() {
+    return areFieldsFilled([emailController, nameController, passwordController]);
   }
 }

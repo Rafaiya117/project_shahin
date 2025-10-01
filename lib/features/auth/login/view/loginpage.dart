@@ -1,17 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/components/custom_button/custom_button.dart';
 import 'package:project_shahin/core/components/textfields/custom_textfield.dart';
 import 'package:project_shahin/core/utils/theme.dart';
+import 'package:project_shahin/features/auth/login/controller/login_controller.dart';
+import 'package:provider/provider.dart';
 
 class Loginpage extends StatelessWidget {
   const Loginpage({super.key});
   
   @override
   Widget build(BuildContext context) {
+    final loginController = Provider.of<LoginController>(context, listen: false);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -75,7 +77,7 @@ class Loginpage extends StatelessWidget {
               CustomTextField(
                 hintText: "Enter Email Address",
                 iconPath: "assets/icons/email_icon.svg",
-                controller: TextEditingController(),
+                controller: loginController.emailController,
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   // handle change
@@ -85,7 +87,7 @@ class Loginpage extends StatelessWidget {
               CustomTextField(
                 hintText: "Enter Password",
                 iconPath: "assets/icons/password_icon.svg",
-                controller: TextEditingController(),
+                controller: loginController.passwordController,
                 obscureText: true, 
               ),
               Align(
@@ -111,8 +113,14 @@ class Loginpage extends StatelessWidget {
               child: CustomElevatedButton(
               text: 'Sign In',
                 onPressed: () {
+                  if (loginController.validateLoginFields()) {
                     context.push('/home');
-                },
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Please fill in all fields")),
+                      );
+                    }
+                  },
                   backgroundColor: AppColors.button_background,
                   textColor: AppTextColors.secondary_color,
                   //borderColor: Colors.black,

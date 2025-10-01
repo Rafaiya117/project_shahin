@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:project_shahin/core/components/qoute_card/custom_qoute_card.dart';
 import 'package:project_shahin/core/utils/theme.dart';
 import 'package:project_shahin/features/collection/controller/collection_controller.dart';
+import 'package:project_shahin/features/collection/custom_widget/delete.dart';
 import 'package:provider/provider.dart';
 
 class MyCollection extends StatelessWidget {
@@ -46,7 +47,12 @@ class MyCollection extends StatelessWidget {
                         child: SvgPicture.asset('assets/icons/shorting.svg', width: 24.w, height: 24.h),
                       ),
                       SizedBox(width: 10.w),
-                      SvgPicture.asset('assets/icons/menu.svg', width: 8.w, height: 24.h),
+                      GestureDetector(
+                        onTap: (){
+                          showDeletePopup(context);
+                        }, 
+                        child: SvgPicture.asset('assets/icons/menu.svg', width: 24.w, height: 24.h),
+                      ),
                     ],
                   ),
                   SizedBox(height: 20.h),

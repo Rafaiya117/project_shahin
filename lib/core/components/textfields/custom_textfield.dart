@@ -52,29 +52,29 @@ class CustomTextField extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: hasBorder
-              ? BorderSide(
-                  color: AppColors.button_background,
-                  width: 1.5,
-                )
-              : BorderSide.none, // keeps radius even without visible border
+            ? BorderSide(
+              color: AppColors.button_background,
+              width: 1.5,
+            )
+          : BorderSide.none, 
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: hasBorder
-              ? BorderSide(
-                  color: AppColors.button_background,
-                  width: 1.5,
-                )
-              : BorderSide.none,
+            ? BorderSide(
+              color: AppColors.button_background,
+              width: 1.5,
+            )
+          : BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: hasBorder
-              ? BorderSide(
-                  color: AppColors.button_background,
-                  width: 1.5,
-                )
-              : BorderSide.none,
+            ? BorderSide(
+              color: AppColors.button_background,
+              width: 1.5,
+            )
+          : BorderSide.none,
         ),
         prefixIcon: Padding(
           padding: const EdgeInsets.all(12),

@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
             // Quote in center
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -57,7 +57,7 @@ class Home extends StatelessWidget {
 
             // Top-right points icon
             Positioned(
-              top: 10,
+              top: 30,
               right: 10,
               child: Row(
                 children: [
@@ -101,7 +101,7 @@ class Home extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 50,
+              top: 90,
               right: 10,
               child:GestureDetector(
                 onTap: () {

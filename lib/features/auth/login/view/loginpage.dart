@@ -131,6 +131,7 @@ class Loginpage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Divider(
+                      // ignore: deprecated_member_use
                       color: Colors.grey.withOpacity(0.5),
                       thickness: 1,
                       endIndent: 12,
@@ -190,7 +191,7 @@ class Loginpage extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           context.push('/signup');
-                        },
+                      },
                     ),
                   ],
                 ),

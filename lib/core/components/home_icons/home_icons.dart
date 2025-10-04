@@ -55,7 +55,7 @@ class _IconRowState extends State<IconRow> {
           },
           //activeColor: Colors.white,
         ),
-        const SizedBox(width: 12), 
+        const SizedBox(width: 20), 
         Consumer<HomeController>(
           builder: (context, controller, _) {
             return buildSvgIcon(
@@ -68,7 +68,7 @@ class _IconRowState extends State<IconRow> {
             );
           },
         ),
-        const SizedBox(width: 12),
+        const SizedBox(width: 20),
         // buildSvgIcon(
         //   assetPath: 'assets/icons/bookmark.svg',
         //   isActive: isBookmarked,

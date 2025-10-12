@@ -92,12 +92,25 @@ class SignUp extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(
               text: 'Sign Up',
-                onPressed: () {
+                onPressed: () async {
                   if (SignUp.validateSignupFields()) {
-                    context.push('/home');
+                    final success = await SignUp.signupUser();
+                      if (success) {
+                        if (context.mounted) context.push('/home');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              SignUp.signupError ?? 'Signup failed',
+                            ),
+                          ),
+                        );
+                      }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Please fill in all fields")),
+                        const SnackBar(
+                          content: Text("Please fill in all fields"),
+                        ),
                       );
                     }
                   },

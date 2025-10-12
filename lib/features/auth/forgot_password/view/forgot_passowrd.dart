@@ -6,12 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/components/custom_button/custom_button.dart';
 import 'package:project_shahin/core/components/textfields/custom_textfield.dart';
 import 'package:project_shahin/core/utils/theme.dart';
+import 'package:project_shahin/features/auth/forgot_password/controller/fortgotpass_controller.dart';
+import 'package:provider/provider.dart';
 
 class ForgotPassowrd extends StatelessWidget {
   const ForgotPassowrd({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final forgotpassController = Provider.of<FortgotpassController>(context, listen: false);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -80,7 +83,7 @@ class ForgotPassowrd extends StatelessWidget {
               CustomTextField(
                 hintText: "Enter Email Address",
                 iconPath: "assets/icons/email_icon.svg",
-                controller: TextEditingController(),
+                controller: forgotpassController.emailController,
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   // handle change
@@ -92,9 +95,33 @@ class ForgotPassowrd extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(
               text: 'Request OTP',
-                onPressed: () {
-                  context.push('/otp_page');
-                },
+                onPressed: () async {
+                  if (forgotpassController.validateLoginFields()) {
+                    final success = await forgotpassController.sendForgotPasswordEmail();
+                      if (success) {
+                        if (context.mounted) {
+                          final email = forgotpassController.emailController.text.trim();
+                          final encodedEmail = Uri.encodeComponent(email);
+                          context.push('/otp_page?email=$encodedEmail');
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              forgotpassController.errorMessage ??
+                                  'Request failed',
+                            ),
+                          ),
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please enter your email"),
+                        ),
+                      );
+                    }
+                  },
                   backgroundColor: AppColors.button_background,
                   textColor: AppTextColors.secondary_color,
                 ),

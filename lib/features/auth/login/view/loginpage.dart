@@ -112,12 +112,25 @@ class Loginpage extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(
               text: 'Sign In',
-                onPressed: () {
+                onPressed: () async {
                   if (loginController.validateLoginFields()) {
-                    context.push('/home');
+                    final success = await loginController.loginUser();
+                      if (success) {
+                        if (context.mounted) context.push('/home');
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              loginController.loginError ?? 'Login failed',
+                            ),
+                          ),
+                        );
+                      }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Please fill in all fields")),
+                        const SnackBar(
+                          content: Text("Please fill in all fields"),
+                        ),
                       );
                     }
                   },

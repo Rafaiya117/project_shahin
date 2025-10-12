@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/components/custom_button/custom_button.dart';
 import 'package:project_shahin/core/utils/theme.dart';
+import 'package:project_shahin/features/auth/otp/controller/otp_controller.dart';
+import 'package:provider/provider.dart';
 
 class Otppage extends StatelessWidget {
   const Otppage({super.key});
@@ -95,35 +97,52 @@ class Otppage extends StatelessWidget {
                 fieldWidth: 70.w,
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 borderRadius: BorderRadius.circular(12),
-                onCodeChanged: (String code) {},
+                onCodeChanged: (String code) {
+                  final controller = Provider.of<OtpController>(
+                    context,
+                    listen: false,
+                  );
+                  controller.otpController.text = code; // just store input
+                },
                 textStyle: TextStyle(
                   fontFamily: 'SFProDisplay',
                   fontWeight: FontWeight.bold,
                   fontSize: 12.sp,
                   color: AppTextColors.primary_color,
                 ),
-                onSubmit: (String verificationCode) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Verification Code"),
-                        content: Text('Code entered is $verificationCode'),
-                      );
-                    },
-                  );
-                }, // end onSubmit
+                onSubmit: (_) {}, // do nothing on submit
               ),
+
               SizedBox(height: 30.h),
-            SizedBox(
-              width: double.infinity,
-              child: CustomElevatedButton(
-              text: 'Request OTP',
-                onPressed: () {
-                  context.push('/reset_password');
-                },
-                  backgroundColor: AppColors.button_background,
-                  textColor: AppTextColors.secondary_color,
+              SizedBox(
+                width: double.infinity,
+                child: CustomElevatedButton(
+                  text: 'Request OTP',
+                  onPressed: () async {
+                    final email = Uri.decodeComponent(
+                      GoRouterState.of(context).uri.queryParameters['email'] ?? '',);
+                    final controller = Provider.of<OtpController>(context,listen: false,);
+                    final otp = controller.otpController.text.replaceAll(RegExp(r'\s+'),'',);
+                    if (otp.length != 4) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Please enter a 4-digit OTP'),),
+                      );
+                      return;
+                    }
+                    final isVerified = await controller.verifyOtpUser(email,otp,);
+                    if (isVerified) {
+                      final encodedEmail = Uri.encodeComponent(email);
+                      context.push('/reset_password?email=$encodedEmail');
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            controller.otpError ?? 'OTP verification failed',
+                          ),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ),
               SizedBox(height: 20.h),

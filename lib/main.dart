@@ -1,11 +1,15 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_shahin/config/app_route/app_route.dart';
 import 'package:project_shahin/config/connectivity/no_connectivity.dart';
 import 'package:project_shahin/features/achivement/controller/achivement_controller.dart';
 import 'package:project_shahin/features/alpha_circle/controller/controller.dart';
+import 'package:project_shahin/features/auth/forgot_password/controller/fortgotpass_controller.dart';
 import 'package:project_shahin/features/auth/login/controller/login_controller.dart';
+import 'package:project_shahin/features/auth/otp/controller/otp_controller.dart';
+import 'package:project_shahin/features/auth/reset_password/controller/reset_passowerd_controller.dart';
 import 'package:project_shahin/features/auth/sign_up/controller/signup_controller.dart';
 import 'package:project_shahin/features/category/controller/category_controller.dart';
 import 'package:project_shahin/features/collection/controller/collection_controller.dart';
@@ -15,7 +19,9 @@ import 'package:project_shahin/features/home/controller/home_controller.dart';
 import 'package:project_shahin/features/search/controller/search_controller.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -65,7 +71,9 @@ class _MyAppState extends State<MyApp> {
             ChangeNotifierProvider<AchivementController>(create: (_) => AchivementController()),
             ChangeNotifierProvider<LoginController>(create: (_) => LoginController()),
             ChangeNotifierProvider<SignupController>(create: (_) => SignupController()),
-           
+            ChangeNotifierProvider<FortgotpassController>(create: (_) => FortgotpassController()),
+            ChangeNotifierProvider<ResetPassowerdController>(create: (_) => ResetPassowerdController()),
+            ChangeNotifierProvider<OtpController>(create: (_) => OtpController()),
           ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

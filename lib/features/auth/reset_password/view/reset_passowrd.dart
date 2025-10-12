@@ -6,12 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/components/custom_button/custom_button.dart';
 import 'package:project_shahin/core/components/textfields/custom_textfield.dart';
 import 'package:project_shahin/core/utils/theme.dart';
+import 'package:project_shahin/features/auth/reset_password/controller/reset_passowerd_controller.dart';
+import 'package:provider/provider.dart';
 
 class ResetPassowrd extends StatelessWidget {
   const ResetPassowrd({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final resetcontroller = Provider.of<ResetPassowerdController>(context, listen: false);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -89,14 +92,14 @@ class ResetPassowrd extends StatelessWidget {
               CustomTextField(
                 hintText: "Enter New Password",
                 iconPath: "assets/icons/password_icon.svg",
-                controller: TextEditingController(),
+                controller: resetcontroller.passwordController,
                 obscureText: true, 
               ),
               SizedBox(height: 20.h,),
               CustomTextField(
                 hintText: "Enter Confirm Password",
                 iconPath: "assets/icons/password_icon.svg",
-                controller: TextEditingController(),
+                controller: resetcontroller.confirm_passwordController,
                 obscureText: true, 
               ),
             SizedBox(height: 30.h,),
@@ -104,9 +107,34 @@ class ResetPassowrd extends StatelessWidget {
               width: double.infinity,
               child: CustomElevatedButton(
               text: 'Reset Password',
-                onPressed: () {
-                //context.push('/profile');
-                },
+                onPressed: () async {
+                  final email = '17203117@iubat.edu';
+                  //Uri.decodeComponent(GoRouterState.of(context).uri.queryParameters['email'] ?? '');
+                    if (resetcontroller.validateLoginFields()) {
+                      final success = await resetcontroller.resetPassword(email);
+                      if (success) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Password reset successful"),
+                          ),
+                        );
+                        if (context.mounted)
+                          context.push('/login'); 
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              resetcontroller.errorMessage ?? 'Reset failed',
+                            ),
+                          ),
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Please fill all fields")),
+                      );
+                    }
+                  },
                   backgroundColor: AppColors.button_background,
                   textColor: AppTextColors.secondary_color,
                 ),

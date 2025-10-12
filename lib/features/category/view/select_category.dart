@@ -14,9 +14,20 @@ class SelectCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => CategoryController(),
+      create: (_) {
+        final controller = CategoryController();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          controller.loadCategories();
+        });
+        return controller;
+      },
       child: Consumer<CategoryController>(
         builder: (context, controller, _) {
+          if (controller.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (controller.errorMessage != null) {
+            return Center(child: Text(controller.errorMessage!));
+          }
           return Scaffold(
             backgroundColor: Colors.transparent,
             body: Container(
@@ -41,7 +52,6 @@ class SelectCategory extends StatelessWidget {
                             'assets/icons/arrow_forward.svg',
                             width: 13.w,
                             height: 16.h,
-                            // ignore: deprecated_member_use
                             color: AppTextColors.primary_color,
                           ),
                         ),

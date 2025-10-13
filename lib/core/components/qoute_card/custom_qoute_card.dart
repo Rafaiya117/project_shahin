@@ -3,25 +3,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_shahin/core/utils/theme.dart';
 
+// widget
 class QuoteCard extends StatefulWidget {
   final String quoteText;
   final String authorName;
   final String dateText;
   final String likeIconPath;
-  final String commentIconPath;
-  final String shareIconPath;
-  final bool showActions; 
+  final String commentIconPath; // now represents SHARE ✅
+  final String shareIconPath;   // now represents SAVE ✅
+  final bool showActions;
   final VoidCallback? onShare;
+
   const QuoteCard({
     Key? key,
     required this.quoteText,
     required this.authorName,
     required this.dateText,
     required this.likeIconPath,
-    required this.commentIconPath,
-    required this.shareIconPath,
+    required this.commentIconPath, // share icon
+    required this.shareIconPath,   // save icon
     this.showActions = true,
-    this.onShare, 
+    this.onShare,
   }) : super(key: key);
 
   @override
@@ -30,14 +32,14 @@ class QuoteCard extends StatefulWidget {
 
 class _QuoteCardState extends State<QuoteCard> {
   bool isLiked = false;
-  bool isCommented = false;
   bool isShared = false;
+  bool isSaved = false;
 
   void toggle(String type) {
     setState(() {
       if (type == 'like') isLiked = !isLiked;
-      if (type == 'comment') isCommented = !isCommented;
       if (type == 'share') isShared = !isShared;
+      if (type == 'save') isSaved = !isSaved;
     });
   }
 
@@ -103,13 +105,14 @@ class _QuoteCardState extends State<QuoteCard> {
               if (widget.showActions) ...[
                 iconButton(widget.likeIconPath, isLiked, () => toggle('like')),
                 const SizedBox(width: 16),
-                iconButton(widget.commentIconPath, isCommented, () => toggle('comment')),
-                const SizedBox(width: 16),
-                // iconButton(widget.shareIconPath, isShared, () => toggle('share')),
-                iconButton(widget.shareIconPath, isShared, () {
+                // SHARE button (commentIconPath)
+                iconButton(widget.commentIconPath, isShared, () {
                   toggle('share');
                   if (widget.onShare != null) widget.onShare!();
                 }),
+                const SizedBox(width: 16),
+                // SAVE button (shareIconPath)
+                iconButton(widget.shareIconPath, isSaved, () => toggle('save')),
               ],
             ],
           ),

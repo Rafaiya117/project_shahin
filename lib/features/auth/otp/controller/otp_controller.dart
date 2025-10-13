@@ -40,5 +40,4 @@ class OtpController extends ChangeNotifier {
     return false;
   }
 }
-
 }

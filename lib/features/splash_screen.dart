@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:project_shahin/core/components/landing_page_customwidget/prograss_indigator_widget.dart';
 import 'package:project_shahin/core/utils/theme.dart';
+import 'package:project_shahin/features/auth/auth_services/auth_services.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,17 +14,24 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
- @override
-void initState() {
-  super.initState();
-  Future.delayed(const Duration(milliseconds: 100), () {
-    Timer(const Duration(seconds: 3), () {
-      if (mounted) context.go('/first_landingpage');
+  final AuthService _authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 100), () async {
+      final loggedIn = await _authService.isLoggedIn();
+      Timer(const Duration(seconds: 3), () {
+        if (!mounted) return;
+        if (loggedIn) {
+          context.go('/home');
+        } else {
+          context.go('/first_landingpage');
+        }
+      });
     });
-  });
-}
-
-
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

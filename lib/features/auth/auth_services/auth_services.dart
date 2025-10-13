@@ -44,6 +44,11 @@ class AuthService {
     );
   }
 
+  Future<bool> isLoggedIn() async {
+    final token = await getToken();
+    return token != null && token.isNotEmpty;
+  }
+
   // ---------------- AUTH REQUESTS ---------------- //
 
   Future<Map<String, dynamic>> login(String email, String password) async {

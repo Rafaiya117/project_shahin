@@ -97,36 +97,30 @@ class Otppage extends StatelessWidget {
                 fieldWidth: 70.w,
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 borderRadius: BorderRadius.circular(12),
-                onCodeChanged: (String code) {
-                  final controller = Provider.of<OtpController>(
-                    context,
-                    listen: false,
-                  );
-                  controller.otpController.text = code; // just store input
-                },
                 textStyle: TextStyle(
                   fontFamily: 'SFProDisplay',
                   fontWeight: FontWeight.bold,
                   fontSize: 12.sp,
                   color: AppTextColors.primary_color,
                 ),
-                onSubmit: (_) {}, // do nothing on submit
+                onSubmit: (String code) {
+                  final controller = Provider.of<OtpController>(context,listen: false,);
+                  controller.otpController.text = code;
+                },
               ),
-
               SizedBox(height: 30.h),
               SizedBox(
                 width: double.infinity,
                 child: CustomElevatedButton(
                   text: 'Request OTP',
                   onPressed: () async {
-                    final email = Uri.decodeComponent(
-                      GoRouterState.of(context).uri.queryParameters['email'] ?? '',);
+                    final email = Uri.decodeComponent(GoRouterState.of(context).uri.queryParameters['email'] ?? '',);
                     final controller = Provider.of<OtpController>(context,listen: false,);
-                    final otp = controller.otpController.text.replaceAll(RegExp(r'\s+'),'',);
+                    final otp = controller.otpController.text.replaceAll(RegExp(r'\s+'), '',);
+                    debugPrint("Entered OTP: $otp");
                     if (otp.length != 4) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please enter a 4-digit OTP'),),
-                      );
+                        const SnackBar(content: Text('Please enter a 4-digit OTP'),),);
                       return;
                     }
                     final isVerified = await controller.verifyOtpUser(email,otp,);
@@ -142,7 +136,7 @@ class Otppage extends StatelessWidget {
                         ),
                       );
                     }
-                  },
+                  }
                 ),
               ),
               SizedBox(height: 20.h),

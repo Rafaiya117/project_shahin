@@ -48,6 +48,7 @@ class FavouriteCollection extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 20.h),
+              // in page
               Consumer<FavouriteController>(
                 builder: (context, controller, _) {
                   return Column(
@@ -59,8 +60,8 @@ class FavouriteCollection extends StatelessWidget {
                           authorName: quote.authorName,
                           dateText: quote.dateText,
                           likeIconPath: "assets/icons/heart_two.svg",
-                          commentIconPath: "assets/icons/share.svg",
-                          shareIconPath: "assets/icons/bookmark.svg",
+                          commentIconPath:"assets/icons/share.svg",
+                          shareIconPath:"assets/icons/bookmark.svg", 
                           showActions: true,
                           onShare: () => controller.shareQuote(
                             quote.quoteText,
